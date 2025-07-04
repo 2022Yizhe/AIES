@@ -53,7 +53,7 @@
         </property>
     </bean>
 
-    <bean id="formFilter" class="com.jubilantz.utils.MyFormAuthenticationFilter"></bean>
+    <bean id="formFilter" class="com.neuswp.utils.MyFormAuthenticationFilter"></bean>
 
     <!--  安全管理器 securityMananger  -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
@@ -64,7 +64,7 @@
     </bean>
 
     <!--  自定义的 Realm  -->
-    <bean id="customRealm" class="com.jubilantz.realms.CustomRealm">
+    <bean id="customRealm" class="com.neuswp.realms.CustomRealm">
         <property name="credentialsMatcher" ref="credentialMatcher"></property>
         <property name="easUserMapper" ref="easUserMapper"></property>
         <property name="easPermissionMapper" ref="easPermissionMapper"></property>

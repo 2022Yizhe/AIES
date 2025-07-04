@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jubilantz.mappers.EasCourseMapper">
-    <resultMap id="BaseResultMap" type="com.jubilantz.entity.EasCourse">
+<mapper namespace="com.neuswp.mappers.EasCourseMapper">
+    <resultMap id="BaseResultMap" type="com.neuswp.entity.EasCourse">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="start_date"  jdbcType="DATE" property="startDate" />
         <result column="end_date"  jdbcType="DATE" property="endDate" />
@@ -20,7 +20,7 @@
     <sql id="Base_Column_List">
     id, start_date, end_date, class_hour, test_mode, student_num, choice_num, t_id, base_course_id
     </sql>
-    <insert id="addCourse" parameterType="com.jubilantz.entity.EasCourse">
+    <insert id="addCourse" parameterType="com.neuswp.entity.EasCourse">
         insert into eas_course
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -83,7 +83,7 @@
     </insert>
 
     <!-- 加入if判断日期!=null 会更新失败-->
-    <update id="updateCourseById" parameterType="com.jubilantz.entity.EasCourse">
+    <update id="updateCourseById" parameterType="com.neuswp.entity.EasCourse">
         update eas_course
         <set>
 
@@ -127,7 +127,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="completeCourse" parameterType="com.jubilantz.entity.EasCourse">
+    <update id="completeCourse" parameterType="com.neuswp.entity.EasCourse">
         update eas_course
         <set>
             <if test="complete != null and complete != ''">
@@ -163,7 +163,7 @@
             limit #{pageUtil.pageStart},#{pageUtil.count}
         </if>
     </select>
-    <select id="findCourseByBaseCourseIdAndTeacherId" resultType="com.jubilantz.entity.EasCourse">
+    <select id="findCourseByBaseCourseIdAndTeacherId" resultType="com.neuswp.entity.EasCourse">
         select * from eas_course
         <where>
             <if test="baseCourseId != null and baseCourseId != '' and tId != null and tId != ''">

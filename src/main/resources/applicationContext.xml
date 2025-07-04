@@ -7,7 +7,7 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 启动 Spring 自动扫描并注册 @Component、@Service、@Repository 等注解的类 -->
-    <context:component-scan base-package="com.jubilantz" />
+    <context:component-scan base-package="com.neuswp" />
 
     <!-- 加载配置文件 -->
     <context:property-placeholder location="classpath:db.properties"/>
@@ -39,7 +39,7 @@
 
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.jubilantz.mappers"/>
+        <property name="basePackage" value="com.neuswp.mappers"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
 
@@ -57,7 +57,7 @@
     </tx:advice>
 
     <aop:config>
-        <aop:pointcut id="p" expression="execution(* com.jubilantz.mappers.*.*(..))"></aop:pointcut>
+        <aop:pointcut id="p" expression="execution(* com.neuswp.mappers.*.*(..))"></aop:pointcut>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="p"></aop:advisor>
     </aop:config>
 

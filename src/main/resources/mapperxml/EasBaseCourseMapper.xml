@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jubilantz.mappers.EasBaseCourseMapper">
+<mapper namespace="com.neuswp.mappers.EasBaseCourseMapper">
     <insert id="addBaseCourse">
         insert into eas_base_course(coursename,synopsis)
           values (#{coursename},#{synopsis})
@@ -20,16 +20,16 @@
         </foreach>
     </delete>
 
-    <select id="getAll" resultType="com.jubilantz.entity.EasBaseCourse">
+    <select id="getAll" resultType="com.neuswp.entity.EasBaseCourse">
         select * from eas_base_course
     </select>
-    <select id="getListById" resultType="com.jubilantz.entity.EasBaseCourse">
+    <select id="getListById" resultType="com.neuswp.entity.EasBaseCourse">
         select * from eas_base_course where id = #{id}
     </select>
-    <select id="getBaseCourseById" resultType="com.jubilantz.entity.EasBaseCourse">
+    <select id="getBaseCourseById" resultType="com.neuswp.entity.EasBaseCourse">
         select * from eas_base_course where id = #{id}
     </select>
-    <select id="getList" resultType="com.jubilantz.entity.EasBaseCourse">
+    <select id="getList" resultType="com.neuswp.entity.EasBaseCourse">
         select * from eas_base_course
         <where>
             <if test="easBaseCourse.coursename != null and easBaseCourse.coursename != ''">
@@ -46,7 +46,7 @@
     <select id="getCount" resultType="java.lang.Integer">
         select count(*) from eas_base_course
     </select>
-    <select id="findBaseCourseName" resultType="com.jubilantz.entity.EasBaseCourse">
+    <select id="findBaseCourseName" resultType="com.neuswp.entity.EasBaseCourse">
         select * from eas_base_course where coursename = #{baseCourseName}
     </select>
 

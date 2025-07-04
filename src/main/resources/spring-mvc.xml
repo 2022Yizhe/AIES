@@ -62,7 +62,7 @@
     <mvc:resources location="/lib/" mapping="/lib/**"/>
     <mvc:resources location="/css/" mapping="/css/**"/>
 
-    <context:component-scan base-package="com.jubilantz.controller"></context:component-scan>
+    <context:component-scan base-package="com.neuswp.controller"></context:component-scan>
 
 </beans>
 

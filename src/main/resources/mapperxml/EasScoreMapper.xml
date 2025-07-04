@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jubilantz.mappers.EasScoreMapper">
-    <resultMap id="BaseResultMapScore" type="com.jubilantz.entity.EasScore">
+<mapper namespace="com.neuswp.mappers.EasScoreMapper">
+    <resultMap id="BaseResultMapScore" type="com.neuswp.entity.EasScore">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="score" jdbcType="INTEGER" property="score" />
         <result column="result" jdbcType="VARCHAR" property="result" />
@@ -9,7 +9,7 @@
         <result column="s_id" jdbcType="INTEGER" property="sId" />
     </resultMap>
 
-    <resultMap id="BaseResultMap" type="com.jubilantz.entity.EasCourse">
+    <resultMap id="BaseResultMap" type="com.neuswp.entity.EasCourse">
         <result column="start_date" jdbcType="DATE" property="startDate" />
         <result column="courseName" jdbcType="VARCHAR" property="courseName" />
         <result column="teacherName" jdbcType="VARCHAR" property="teacherName" />
@@ -18,7 +18,7 @@
         <result column="result" jdbcType="VARCHAR" property="result" />
     </resultMap>
 
-    <insert id="insertSelective" parameterType="com.jubilantz.entity.EasScore">
+    <insert id="insertSelective" parameterType="com.neuswp.entity.EasScore">
         insert into eas_score
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -96,7 +96,7 @@
             #{item.id,jdbcType=INTEGER}
         </foreach>
     </update>
-    <delete id="deleteScore" parameterType="com.jubilantz.entity.EasScore">
+    <delete id="deleteScore" parameterType="com.neuswp.entity.EasScore">
         delete from eas_score
         where c_id = #{cId,jdbcType=INTEGER}
         and s_id = #{sId,jdbcType=INTEGER}
@@ -135,7 +135,7 @@
         </if>
     </select>
 <!--    直接查外键的值报空 需要关连resultMap   -->
-    <select id="getcIdById" resultType="com.jubilantz.entity.EasScore" resultMap="BaseResultMapScore">
+    <select id="getcIdById" resultType="com.neuswp.entity.EasScore" resultMap="BaseResultMapScore">
         select * from eas_score where id = #{id}
     </select>
     <select id="getStartDateByCourseId" resultType="java.util.Date">
