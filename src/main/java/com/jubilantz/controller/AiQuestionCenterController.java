@@ -2,6 +2,7 @@ package com.jubilantz.controller;
 
 import com.jubilantz.entity.AiMessage;
 import com.jubilantz.entity.EasUser;
+import com.jubilantz.services.AiQuestionCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,9 @@ import java.util.Map;
 @RequestMapping("/aiQuestionCenter")
 public class AiQuestionCenterController {
 
-//    @Autowired
-//    private AIQuestionService aiQuestionService;
-//
+    @Autowired
+    private AiQuestionCenterService aiQuestionService;
+
 //    @Autowired
 //    private ConversationHistoryService historyService;
 
@@ -42,12 +43,13 @@ public class AiQuestionCenterController {
         try {
             // 1. 获取当前用户
             EasUser currentUser = (EasUser) session.getAttribute("login_user");
-            System.out.println(currentUser);
+            System.out.println("[Controller] Current User: " + currentUser);
 
-//            // 2. 调用AI服务获取回答
+            // 2. 调用AI服务获取回答
 //            AIResponse aiResponse = aiQuestionService.getAIAnswer(question, currentUser.getId());
-//
-//            // 3. 保存对话记录
+            String aiMessage = aiQuestionService.simpleAskQuestion(question);
+
+            // 3. 保存对话记录
 //            historyService.saveConversation(
 //                    currentUser.getId(),
 //                    question,
@@ -56,7 +58,6 @@ public class AiQuestionCenterController {
 //            );
 
             // 4. 构造响应
-            String aiMessage = "已阅";
             response.put("code", 0);
             response.put("msg", "success");
 //            response.put("data", aiResponse);
