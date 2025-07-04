@@ -20,13 +20,13 @@
 项目整体框架：Spring + SpringMVC + Mybatis + Shiro + Layui + Tomcat + VolcEngine sdk 
 
 
-操作系统：Windows 
+操作系统：Windows 11
 
-数据库：Mysql8.0.16
+数据库：Mysql 8.4.5
 
-服务器：Tomcat8.5.38
+服务器：Tomcat 8.5.85
 
-开发工具：IntelliJ IDEA 、Xftp 7
+开发工具：IntelliJ IDEA 2024.2.4 、Xftp 7
 
 JDK版本：JDK version 17 (azul zulu, note)
 
