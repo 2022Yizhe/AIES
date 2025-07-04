@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jubilantz.mappers.EasStudentMapper">
+<mapper namespace="com.neuswp.mappers.EasStudentMapper">
 
-    <resultMap id="resStudent" type="com.jubilantz.entity.EasStudent">
+    <resultMap id="resStudent" type="com.neuswp.entity.EasStudent">
         <!-- property指实体类 -->
         <id property="id" column="id"/>
         <result property="username" column="username"/>
@@ -12,18 +12,18 @@
         <result property="phone" column="phone"/>
         <result property="motto" column="motto"/>
         <result property="class_id" column="class_id"/>
-        <association property="user" javaType="com.jubilantz.entity.EasUser">
+        <association property="user" javaType="com.neuswp.entity.EasUser">
             <id property="id" column="id"/>
             <result property="username" column="username"/>
         </association>
 
-        <association property="easClass" javaType="com.jubilantz.entity.EasClass">
+        <association property="easClass" javaType="com.neuswp.entity.EasClass">
             <id property="id" column="id"/>
             <result property="classes" column="classes"/>
         </association>
     </resultMap>
 
-    <resultMap id="BaseResultMap" type="com.jubilantz.entity.EasStudent">
+    <resultMap id="BaseResultMap" type="com.neuswp.entity.EasStudent">
         <id column="sId" jdbcType="VARCHAR" property="id" />
         <result column="sName" jdbcType="VARCHAR" property="name" />
         <result column="sex" jdbcType="VARCHAR" property="sex" />
@@ -59,7 +59,7 @@
     </delete>
 
 
-    <select id="getList" parameterType="com.jubilantz.entity.EasStudent" resultType="com.jubilantz.entity.EasStudent">
+    <select id="getList" parameterType="com.neuswp.entity.EasStudent" resultType="com.neuswp.entity.EasStudent">
         select * from eas_student
         <where>
             <if test="name != null and name != ''">
@@ -68,7 +68,7 @@
         </where>
     </select>
 
-    <select id="findList" parameterType="com.jubilantz.entity.EasStudent" resultMap="resStudent">
+    <select id="findList" parameterType="com.neuswp.entity.EasStudent" resultMap="resStudent">
         SELECT s.id,u.username,s.name,s.sex,s.birthday,s.phone,c.classes,s.motto
         FROM ( eas_student as s inner join eas_class as c on s.class_id = c.id)
         inner join eas_user as u on s.username = u.username

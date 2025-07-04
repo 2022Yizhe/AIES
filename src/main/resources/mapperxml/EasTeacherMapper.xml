@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jubilantz.mappers.EasTeacherMapper">
+<mapper namespace="com.neuswp.mappers.EasTeacherMapper">
 
-    <resultMap id="resTeacher" type="com.jubilantz.entity.EasTeacher">
+    <resultMap id="resTeacher" type="com.neuswp.entity.EasTeacher">
         <!-- property指实体类 -->
         <id property="id" column="id"/>
         <result property="username" column="username"/>
@@ -12,7 +12,7 @@
         <result property="phone" column="phone"/>
         <result property="education" column="education"/>
         <result property="motto" column="motto"/>
-        <association property="user" javaType="com.jubilantz.entity.EasUser">
+        <association property="user" javaType="com.neuswp.entity.EasUser">
             <id property="id" column="id"/>
             <result property="username" column="username"/>
         </association>
@@ -42,7 +42,7 @@
         </where>
     </delete>
 
-    <select id="findTeacherList" parameterType="com.jubilantz.entity.EasTeacher" resultMap="resTeacher">
+    <select id="findTeacherList" parameterType="com.neuswp.entity.EasTeacher" resultMap="resTeacher">
         SELECT t.id,u.username,t.name,t.sex,t.birthday,t.phone,t.education,t.motto
         FROM  eas_teacher as t
         inner join eas_user as u on t.username = u.username
@@ -60,18 +60,18 @@
         </where>
         order by id ASC;
     </select>
-    <select id="findListByUsername" resultType="com.jubilantz.entity.EasTeacher">
+    <select id="findListByUsername" resultType="com.neuswp.entity.EasTeacher">
         select * from eas_teacher
         where username = #{username,jdbcType=VARCHAR}
     </select>
-    <select id="getTeacherByUsername" resultType="com.jubilantz.entity.EasTeacher">
+    <select id="getTeacherByUsername" resultType="com.neuswp.entity.EasTeacher">
         select * from eas_teacher
         where username = #{username,jdbcType=VARCHAR}
     </select>
-    <select id="getAll" resultType="com.jubilantz.entity.EasTeacher">
+    <select id="getAll" resultType="com.neuswp.entity.EasTeacher">
         select * from eas_teacher
     </select>
-    <select id="findTeacherByUsername" resultType="com.jubilantz.entity.EasTeacher">
+    <select id="findTeacherByUsername" resultType="com.neuswp.entity.EasTeacher">
         select * from eas_teacher where username = #{username,jdbcType=VARCHAR}
     </select>
     <select id="getTotal" resultType="java.lang.Integer">

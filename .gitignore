@@ -1,2 +1,4 @@
 target/
-!target/EducationalAdministrationSystemBasedOnSSM-1.0-SNAPSHOT.war
+.idea/
+.idea/*
+AIEnabledEducationalSystem.iml
