@@ -13,12 +13,13 @@
 
 #### 软件架构
 
-项目框架我采用的是：Spring + SpringMVC + Mybatis + Shiro + Layui + Tomcat + VolcEngine sdk
+项目整体框架：Spring + SpringMVC + Mybatis + Shiro + Layui + Tomcat + VolcEngine sdk
+
 操作系统：Windows
 数据库：Mysql8.0.16
 服务器：Tomcat8.5.38
 开发工具：IntelliJ IDEA 、Xftp 7
-JDK版本：JDK version1.8.0
+JDK版本：JDK version 17 (azul zulu, note)
 安全框架：Shiro
 UI框架: Layui
 推理服务：VolcEngine sdk
