@@ -31,6 +31,13 @@
       <artifactId>spring-test</artifactId>
       <version>4.1.6.RELEASE</version>
     </dependency>
+<!--    &lt;!&ndash; 单元测试框架 &ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>org.mockito</groupId>-->
+<!--      <artifactId>mockito-core</artifactId>-->
+<!--      <version>3.12.4</version>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
 
     <!--    spring    -->
     <dependency>

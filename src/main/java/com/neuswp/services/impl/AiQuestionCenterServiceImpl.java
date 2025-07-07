@@ -2,6 +2,7 @@ package com.neuswp.services.impl;
 
 import com.neuswp.services.AiQuestionCenterService;
 import com.neuswp.utils.VolEngineAI;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
