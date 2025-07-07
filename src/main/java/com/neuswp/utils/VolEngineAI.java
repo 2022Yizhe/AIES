@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.ConnectionPool;
 import okhttp3.Dispatcher;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 
 // 请确保将 API Key 存储在环境变量 ARK_API_KEY 中
-//@Component
 @Slf4j
 public class VolEngineAI {
     private String apiKey;
