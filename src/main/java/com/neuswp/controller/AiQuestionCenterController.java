@@ -19,7 +19,7 @@ public class AiQuestionCenterController {
     private AiQuestionCenterService aiQuestionService;
 
     /**
-     * 跳转到AI问答中心页面
+     * 跳转到 AI 问答中心页面
      */
     @RequestMapping("/index")
     public String index() {
@@ -33,17 +33,13 @@ public class AiQuestionCenterController {
     @ResponseBody
     public Map<String, Object> askQuestion(@RequestParam String question, HttpSession session) {
 
-        try {
-            // 1. 获取当前用户
-            EasUser currentUser = (EasUser) session.getAttribute("login_user");
-            System.out.println("[Controller] Current User: " + currentUser);
+        // 1. 获取当前用户
+        EasUser currentUser = (EasUser) session.getAttribute("login_user");
+        System.out.println("[Controller] Current User: " + currentUser);
 
-            // 2. 调用 AI 服务获取回答
-            String aiMessage = aiQuestionService.simpleAskQuestion(question);
-            return Result.success(aiMessage);
-
-        } catch (Exception e) {
-            return Result.error("获取 AI 回答失败: " + e.getMessage());
-        }
+        // 2. 调用 AI 服务获取回答
+        String aiMessage = aiQuestionService.simpleAskQuestion(question);
+        return Result.success(aiMessage);
     }
+
 }
