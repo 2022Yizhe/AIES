@@ -38,7 +38,8 @@ public class AiQuestionCenterController {
         System.out.println("[Controller] Current User: " + currentUser);
 
         // 2. 调用 AI 服务获取回答
-        String aiMessage = aiQuestionService.simpleAskQuestion(question);
+//        String aiMessage = aiQuestionService.simpleAskQuestion(question);
+        String aiMessage = aiQuestionService.askQuestion(question);
         return Result.success(aiMessage);
     }
 
