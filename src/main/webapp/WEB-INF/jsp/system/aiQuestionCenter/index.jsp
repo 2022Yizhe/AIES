@@ -160,7 +160,7 @@
     </div>
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
     layui.use(['jquery', 'layer'], function(){
         var $ = layui.jquery;
@@ -215,6 +215,24 @@
         }
 
         // 添加消息到聊天框
+        // function addMessage(content, sender) {
+        //     var now = new Date();
+        //     var timeString = now.getFullYear() + '-' +
+        //         (now.getMonth() + 1).toString().padStart(2, '0') + '-' +
+        //         now.getDate().toString().padStart(2, '0') + ' ' +
+        //         now.getHours().toString().padStart(2, '0') + ':' +
+        //         now.getMinutes().toString().padStart(2, '0');
+        //
+        //     var messageClass = 'message ' + sender + '-message';
+        //     var messageHtml = '<div class="' + messageClass + '">' +
+        //         '<div>' + content + '</div>' +
+        //         '<div class="message-time">' + timeString + '</div>' +
+        //         '</div>';
+        //
+        //     $('#chatBox').append(messageHtml);
+        //     scrollToBottom();
+        // }
+        // 将 AI 返回的 Markdown 文本渲染为格式化内容
         function addMessage(content, sender) {
             var now = new Date();
             var timeString = now.getFullYear() + '-' +
@@ -224,14 +242,19 @@
                 now.getMinutes().toString().padStart(2, '0');
 
             var messageClass = 'message ' + sender + '-message';
+
+            // 使用 marked 将 content 转换为 HTML
+            var htmlContent = marked.parse(content);
+
             var messageHtml = '<div class="' + messageClass + '">' +
-                '<div>' + content + '</div>' +
+                '<div>' + htmlContent + '</div>' +
                 '<div class="message-time">' + timeString + '</div>' +
                 '</div>';
 
             $('#chatBox').append(messageHtml);
             scrollToBottom();
         }
+
 
         // 显示"正在输入"指示器
         function showTypingIndicator() {
