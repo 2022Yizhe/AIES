@@ -11,7 +11,7 @@ public interface Constants {
 
     public static final String CODE_ERROR = "randomCodeError";
 
-    //在个人资料位置用到过 数据库更改会有一点影响
+    // 在个人资料位置用到过 数据库更改会有一点影响
     public static final String STUDENT = "学生";
 
     public static final String TEACHER = "教师";

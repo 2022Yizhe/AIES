@@ -2,17 +2,15 @@ package com.neuswp.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDate;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/14 10:55
- */
+
 public class EasStudent implements Serializable {
     private Integer id;
     private String username;
     private String name;
     private String sex;
-    private Date birthday;
+    private LocalDate birthday;
     private String phone;
     private Integer class_id;
     private String motto;
@@ -113,11 +111,11 @@ public class EasStudent implements Serializable {
         this.sex = sex;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

@@ -1,6 +1,13 @@
 package com.neuswp.services;
 
+import java.util.List;
+import java.util.Map;
+
 public interface AiQuestionCenterService {
 
-    public String simpleAskQuestion(String question);
+    String simpleAskQuestion(String question);
+
+    String askQuestion(String question);
+
+    List<Map<String, Object>> getHistoryByUserId(Integer id, Integer page, Integer limit);
 }

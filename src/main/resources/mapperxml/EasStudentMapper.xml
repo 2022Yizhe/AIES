@@ -35,6 +35,7 @@
             <!-- 班级名称 -->
             <result column="className" jdbcType="VARCHAR" property="className" />
     </resultMap>
+
     <insert id="addUsername">
         insert into eas_student(username,class_id)
           values (#{username},1)

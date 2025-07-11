@@ -1,15 +1,25 @@
 package com.neuswp.services.impl;
 
+import com.neuswp.constant.IntendKeyWords;
 import com.neuswp.services.AiQuestionCenterService;
+import com.neuswp.utils.ExcelExport;
 import com.neuswp.utils.VolEngineAI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Service
 public class AiQuestionCenterServiceImpl implements AiQuestionCenterService {
 
     private VolEngineAI volEngineAI;
+
+    @Autowired
+    private ExcelExport excelExport;
 
     public AiQuestionCenterServiceImpl() {
         try {
@@ -23,9 +33,68 @@ public class AiQuestionCenterServiceImpl implements AiQuestionCenterService {
     @Override
     public String simpleAskQuestion(String question) {
 
-        // simple ask/reply
+        /// simple ask/reply
         String reply = (volEngineAI == null ? "未成功接入推理模型！" : volEngineAI.SimpleGenerate(question));
 
         return reply;
     }
+
+    @Override
+    public String askQuestion(String question) {
+        if (volEngineAI == null)
+            return "未成功接入推理模型";
+
+        /// 识别用户意图，进行带有功能调用的对话
+        // 1. 意图解析
+        String parsedIntend = parseUserInputToIntent(question);
+
+        // 2. 功能调用
+        String url = excelExport.recognize(parsedIntend);
+
+        // 3. 对话
+        String reply = (url != null) ? "自动导出表格: " + url : volEngineAI.SimpleGenerate(question);
+
+        return reply;
+    }
+
+    @Override
+    public List<Map<String, Object>> getHistoryByUserId(Integer id, Integer page, Integer limit) {
+
+        // 1. 从数据库中读取对话记录
+        List<Map<String, Object>> history = new ArrayList<>();
+
+        // 2. 测试用对话记录
+        HashMap<String, Object> chat01 = new HashMap<>();
+        chat01.put("question", "Java中接口和抽象类的区别？");
+        chat01.put("answer", "- 接口中所有方法都是抽象的\n- 抽象类可以有具体实现的方法");
+
+        history.add(chat01);
+
+        // 返回的历史会话
+        return history;
+    }
+
+
+    /**
+     * 简单意图识别
+     * @param input 用户输入字符串 token
+     * @return 意图解析后的结果
+     */
+    private String parseUserInputToIntent(String input) {
+        // 识别出的意图
+        if (input.contains("导出") || input.contains("生成") || input.contains("制定"))
+            if (input.contains("课程")) {
+                return IntendKeyWords.EXPORT_BASE_COURSE_LIST;
+            } else if (input.contains("班级")) {
+                return IntendKeyWords.EXPORT_CLASS_LIST;
+            } else if (input.contains("教师")) {
+                return IntendKeyWords.EXPORT_TEACHER_LIST;
+            } else if (input.contains("学生")) {
+                return IntendKeyWords.EXPORT_STUDENT_LIST;
+            }
+
+        // 未识别出的意图
+        return IntendKeyWords.ERROR_UNKNOWN_INTEND;
+    }
+
 }
