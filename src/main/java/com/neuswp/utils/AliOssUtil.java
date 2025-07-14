@@ -70,7 +70,7 @@ public class AliOssUtil {
                 .append("/")
                 .append(objectName);
 
-        log.info("[Utils] 文件上传到: {}", stringBuilder.toString());
+        log.info("[Utils] File upload to: {}", stringBuilder.toString());
 
         return stringBuilder.toString();
     }

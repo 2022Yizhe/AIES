@@ -4,10 +4,7 @@ import com.neuswp.entity.EasTeacher;
 
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/16 15:18
- */
+
 public interface EasTeacherService {
 
     List<EasTeacher> findTeacherList(EasTeacher easTeacher) throws Exception;

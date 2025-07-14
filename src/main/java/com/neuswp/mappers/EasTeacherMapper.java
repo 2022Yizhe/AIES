@@ -5,10 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/16 15:19
- */
+
 @Mapper
 public interface EasTeacherMapper {
 
