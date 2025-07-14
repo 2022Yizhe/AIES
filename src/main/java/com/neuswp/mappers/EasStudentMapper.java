@@ -1,23 +1,24 @@
 package com.neuswp.mappers;
 
 import com.neuswp.entity.EasStudent;
+import com.neuswp.entity.dto.Student;
 import com.neuswp.utils.PageUtil;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/14 9:48
- */
+
 @Mapper
 public interface EasStudentMapper {
 //    EasStudent getByUsername(String username);
-    //直接查找
+
+    void insertBatch(List<Student> students);
+
+    // 直接查找
     List<EasStudent> getList (EasStudent easStudent);
 
-    //包含两个一对一关系
+    // 包含两个一对一关系
     List<EasStudent> findList(EasStudent easStudent);
 
     List<EasStudent> findListByUsername(String username);

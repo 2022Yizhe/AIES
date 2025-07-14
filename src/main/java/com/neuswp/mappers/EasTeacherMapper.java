@@ -1,14 +1,12 @@
 package com.neuswp.mappers;
 
 import com.neuswp.entity.EasTeacher;
+import com.neuswp.entity.dto.Teacher;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/16 15:19
- */
+
 @Mapper
 public interface EasTeacherMapper {
 
@@ -30,4 +28,6 @@ public interface EasTeacherMapper {
     void addUsername(String username);
 
     void deleteTeacher(String username);
+
+    void insertBatch(List<Teacher> teachers);
 }

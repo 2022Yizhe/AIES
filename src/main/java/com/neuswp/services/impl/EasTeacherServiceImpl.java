@@ -1,21 +1,30 @@
 package com.neuswp.services.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.neuswp.entity.EasTeacher;
+import com.neuswp.entity.EasUser;
+import com.neuswp.entity.dto.Student;
+import com.neuswp.entity.dto.Teacher;
 import com.neuswp.mappers.EasTeacherMapper;
+import com.neuswp.mappers.EasUserMapper;
 import com.neuswp.services.EasTeacherService;
+import com.neuswp.utils.AliOssUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/16 15:18
- */
+
 @Service
 public class EasTeacherServiceImpl implements EasTeacherService {
+
     @Autowired
     private EasTeacherMapper easTeacherMapper;
+
+    @Autowired
+    private EasUserMapper easUserMapper;
 
     @Override
     public List<EasTeacher> findTeacherList(EasTeacher easTeacher) throws Exception {
@@ -63,4 +72,51 @@ public class EasTeacherServiceImpl implements EasTeacherService {
     }
 
 
+    /**
+     * 从 OSS 下载 Excel 并导入教师数据
+     * @param fileUrl OSS 中的文件路径 (如：https:/\.../uploads/UUID_teachers_export_2024-09-15.xlsx)
+     */
+    @Override
+    public void importTeachersFromOSS(String fileUrl) {
+        AliOssUtil aliOssUtil = new AliOssUtil();
+
+        // 下载指定文件
+        byte[] fileBytes = aliOssUtil.download(fileUrl);
+        if (fileBytes == null || fileBytes.length == 0) {
+            throw new RuntimeException("Failed to download file or it's empty in OSS bucket!");
+        }
+
+        // 读取 Excel 数据
+        List<Teacher> teachers = readTeacherExcel(fileBytes, Teacher.class);
+
+        // 插入数据库 (先插入用户表再插入教师表)
+        for (Teacher teacher : teachers) {
+            EasUser user = new EasUser();
+            user.setUsername(teacher.getUsername());
+            user.setPassword("123456");
+            user.setSalt("123456");
+            user.setLocked("0");
+            easUserMapper.add(user);
+        }
+        easTeacherMapper.insertBatch(teachers);
+
+        System.out.println("[Service] Import " + teachers.size() + " teacher records from "+ fileUrl);
+    }
+
+    /**
+     * 使用 EasyExcel 读取 Excel 数据
+     * @return List<Teacher>
+     */
+    private List<Teacher> readTeacherExcel(byte[] fileBytes, Class<Teacher> clazz) {
+        List<Teacher> teacherList = new ArrayList<>();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(fileBytes);
+        try {
+            teacherList = EasyExcel.read(inputStream, clazz, null)
+                    .sheet()
+                    .doReadSync();
+        } catch (Exception e) {
+            System.out.println("[Service] Excel parsing failed!");
+        }
+        return teacherList;
+    }
 }

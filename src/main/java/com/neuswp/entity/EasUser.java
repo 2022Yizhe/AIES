@@ -5,10 +5,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/7 15:27
- */
+
 public class EasUser implements Serializable {
     private Integer id;
     private String username;
@@ -18,9 +15,8 @@ public class EasUser implements Serializable {
 
     private Date regDate = new Date();
 
-    private List<EasRole> roles; //用户拥有的角色列表
-
-    private String roleString; //角色字符串
+    private List<EasRole> roles;    // 用户拥有的角色列表
+    private String roleString;  // 角色字符串
 
     public Date getRegDate() {
         return regDate;

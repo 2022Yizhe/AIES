@@ -41,6 +41,14 @@
           values (#{username},1)
     </insert>
 
+    <insert id="insertBatch">
+        insert into eas_student(username,name,sex,birthday,phone,class_id,motto)
+        values
+        <foreach collection="list" item="student" separator=",">
+            (#{student.username},#{student.name},#{student.sex},#{student.birthday},#{student.phone},#{student.class_id},#{student.motto})
+        </foreach>
+    </insert>
+
     <update id="updateStudent">
         update eas_student
         <set>
