@@ -40,7 +40,7 @@
 
     </div>
 </form>
-<table class="layui-table" lay-data="{id:'teacherTable',url:'${path}/easTeacher/list', page:true,toolbar:'#toolbarDemo',defaultToolbar: ['filter', 'print', 'exports'],even: true}"
+<table class="layui-table" lay-data="{id:'teacherTable',url:'${path}/easTeacher/list', page:true,toolbar:'#toolbarDemo',defaultToolbar: ['filter',  'exports'],even: true}"
        lay-filter="teacherTable">
     <thead>
     <tr>
@@ -55,7 +55,7 @@
         <th lay-data="{field:'motto',}">座右铭</th>
         <%--        <th lay-data="{toolbar:'#barDemo',align:'center'}">操作</th>--%>
         <%--        待完善操作列--%>
-    </r>
+    </tr>
     </thead>
 </table>
 <script>

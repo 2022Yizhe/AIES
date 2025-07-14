@@ -55,7 +55,7 @@
             ,url:'${path}/easBaseCourse/list'
             ,even: true
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
-            ,defaultToolbar: ['filter', 'exports', 'print']
+            ,defaultToolbar: ['filter', 'exports']
             ,title: '基本课程表'
             ,page: true
             ,cols: [[

@@ -66,7 +66,7 @@
             ,even: true
             // ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,toolbar: true //不自定义也需要 开启
-            ,defaultToolbar: ['filter', 'exports', 'print']
+            ,defaultToolbar: ['filter', 'exports']
             ,title: '课程表'
             ,height : "full-125"
             ,page: true //开启分页

@@ -84,7 +84,7 @@
                 height : "full-125",  //高度将始终铺满//
                 cellMinWidth : 95,//最小宽度
                 toolbar:true,
-                defaultToolbar: ['filter', 'exports', 'print'],
+                defaultToolbar: ['filter', 'exports'],
                 title: '选课表',
                 page : true,
                 cols : colsArray

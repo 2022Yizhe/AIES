@@ -36,7 +36,7 @@
 
     </div>
 </form>
-<table class="layui-table" lay-data="{id:'studentTable',url:'${path}/easStudent/list', page:true,toolbar:'#toolbarDemo',defaultToolbar: ['filter', 'print', 'exports'],even: true}"
+<table class="layui-table" lay-data="{id:'studentTable',url:'${path}/easStudent/list', page:true,toolbar:'#toolbarDemo',defaultToolbar: ['filter', 'exports'],even: true}"
        lay-filter="studentTable">
     <thead>
     <tr>

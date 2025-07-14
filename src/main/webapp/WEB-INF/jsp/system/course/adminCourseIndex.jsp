@@ -77,7 +77,7 @@
             ,url:'${path}/easCourse/getCourseList' //获取数据
             ,even: true
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
-            ,defaultToolbar: ['filter', 'exports', 'print']
+            ,defaultToolbar: ['filter', 'exports']
             ,height : "full-125" //高度将始终铺满
             ,cellMinWidth : 95//最小宽度
             ,title: '课程表'
