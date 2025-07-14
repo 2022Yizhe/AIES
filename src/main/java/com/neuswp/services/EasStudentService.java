@@ -5,10 +5,7 @@ import com.neuswp.utils.PageUtil;
 
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/14 10:05
- */
+
 public interface EasStudentService {
     List<EasStudent> getList(EasStudent easStudent) throws Exception;
 
@@ -36,4 +33,6 @@ public interface EasStudentService {
     void addUsername(String username)  throws Exception;
 
     void deleteStudent(String username) throws Exception;
+
+    void importStudentsFromOSS(String fileUrl);
 }

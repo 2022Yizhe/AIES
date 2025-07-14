@@ -21,6 +21,15 @@
         insert into eas_teacher(id,username)
           values (default ,#{username})
     </insert>
+
+    <insert id="insertBatch">
+        insert into eas_teacher(username,name,sex,birthday,phone,education,motto)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.username},#{item.name},#{item.sex},#{item.birthday},#{item.phone},#{item.education},#{item.motto})
+        </foreach>
+    </insert>
+
     <update id="updateTeacher">
         update eas_teacher
         <set>

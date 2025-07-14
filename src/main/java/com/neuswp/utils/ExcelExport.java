@@ -6,6 +6,7 @@ import com.neuswp.entity.EasBaseCourse;
 import com.neuswp.entity.EasClass;
 import com.neuswp.entity.EasStudent;
 import com.neuswp.entity.EasTeacher;
+import com.neuswp.entity.dto.Student;
 import com.neuswp.services.EasBaseCourseService;
 import com.neuswp.services.EasClassService;
 import com.neuswp.services.EasStudentService;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -167,15 +169,29 @@ public class ExcelExport {
     private String exportStudent() {
         try {
             List<EasStudent> dataList = easStudentService.getList(new EasStudent()); // 获取所有学生数据
+            List<Student> resultList = new ArrayList<>();   // 转为 Student 对象
+            for (EasStudent easStudent : dataList) {
+                Student student = new Student(
+                        easStudent.getId(),
+                        easStudent.getUsername(),
+                        easStudent.getName(),
+                        easStudent.getSex(),
+                        easStudent.getBirthday(),
+                        easStudent.getPhone(),
+                        easStudent.getClass_id(),
+                        easStudent.getMotto()
+                );
+                resultList.add(student);
+            }
 
             String fileName = "students_export_" + LocalDateTime.now().toString().replace(":", "-") + ".xlsx";
             String objectName = "exports/" + fileName;  // OSS 上的路径
 
             // 1. 使用 ByteArrayOutputStream 将 Excel 数据写入内存
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            EasyExcel.write(outputStream, EasStudent.class)
+            EasyExcel.write(outputStream, Student.class)
                     .sheet("学生列表")
-                    .doWrite(dataList);
+                    .doWrite(resultList);
 
             // 2. 初始化 AliOssUtil 并上传到 OSS
             AliOssUtil ossClient = new AliOssUtil();
