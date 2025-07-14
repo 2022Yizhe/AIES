@@ -1,15 +1,21 @@
 package com.neuswp.utils;
 
+import com.alibaba.excel.EasyExcel;
 import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.OSSException;
+import com.aliyun.oss.model.OSSObject;
+import com.neuswp.entity.dto.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.commons.io.output.ByteArrayOutputStream;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -70,8 +76,72 @@ public class AliOssUtil {
                 .append("/")
                 .append(objectName);
 
-        log.info("[Utils] File upload to: {}", stringBuilder.toString());
+        System.out.println("[Utils] File upload to: " + stringBuilder.toString());
 
         return stringBuilder.toString();
+    }
+
+    /**
+     * 从 OSS 下载文件
+     * @param fileUrl 文件 url
+     * @return 文件字节流（数组）
+     */
+    public byte[] download(String fileUrl) {
+        OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+        try {
+            // 从 URL 提取 objectName
+            String objectName = parseObjectNameFromUrl(fileUrl);
+            if (objectName == null || objectName.isEmpty()) {
+                System.out.println("[Utils] Invalid OSS file URL: " + fileUrl);
+                return null;
+            }
+
+            // 获取 OSS 文件对象
+            OSSObject ossObject = ossClient.getObject(bucketName, objectName);
+            if (ossObject == null) {
+                System.out.println("[Utils] File not found in OSS: " + objectName);
+                return null;
+            }
+
+            // 获取 OSS 文件字节流
+            InputStream inputStream = ossObject.getObjectContent();
+            byte[] bytes = readStream(inputStream);
+            return bytes;
+        } catch (Exception e) {
+            System.out.println("[Utils] OSS download failed! Object name: " + fileUrl + e);
+            return null;
+        } finally {
+            if (ossClient != null) {
+                ossClient.shutdown();
+            }
+        }
+    }
+
+    /**
+     * 流转 byte[]
+     */
+    private byte[] readStream(InputStream inputStream) throws Exception {
+        byte[] buffer = new byte[1024];
+        int len;
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        while ((len = inputStream.read(buffer)) > -1) {
+            output.write(buffer, 0, len);
+        }
+        return output.toByteArray();
+    }
+
+    /**
+     * 从 OSS 文件 URL 中提取 objectName
+     * 示例输入：https:/\.../uploads/UUID_students_export_2024-09-15.xlsx
+     * 输出：exports/students_export_2024-09-15.xlsx
+     */
+    private String parseObjectNameFromUrl(String fileUrl) {
+        // 去掉协议部分
+        String[] parts = fileUrl.split("//");
+        if (parts.length < 2) return null;
+
+        // 去掉域名部分
+        String pathPart = parts[1].substring(parts[1].indexOf("/") + 1);
+        return pathPart;
     }
 }

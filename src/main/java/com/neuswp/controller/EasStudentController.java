@@ -5,8 +5,10 @@ import com.github.pagehelper.PageHelper;
 import com.neuswp.entity.EasStudent;
 import com.neuswp.services.EasStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -14,24 +16,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/14 10:11
- */
+
 @Controller
 @RequestMapping("/easStudent")
 public class EasStudentController {
+
     @Autowired
     private EasStudentService easStudentService;
-
 
     @RequestMapping("/index")
     public String index() throws Exception{
         return "system/student/index";
     }
 
-
-
+    /**
+     * 获取学生列表
+     */
     @RequestMapping("/list")
     @ResponseBody
     public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page,
@@ -57,6 +57,24 @@ public class EasStudentController {
         map.put("msg","");
 
         return map;
+    }
+
+    @RequestMapping(value = "/import", method = RequestMethod.POST)
+    public ResponseEntity<?> importStudents(@RequestParam("filePath") String filePath) {
+        try {
+            // 下载文件并解析 Excel，然后插入数据库
+            easStudentService.importStudentsFromOSS(filePath);
+            return ResponseEntity.ok().body(Map.of(
+                    "code", 200,
+                    "msg", "success"
+            ));
+        } catch (RuntimeException e) {
+            // 运行时异常，如文件格式错误、数据库键值重复
+            return ResponseEntity.status(500).body(Map.of(
+                    "code", 500,
+                    "msg", "error: " + e.getMessage()
+            ));
+        }
     }
 
 }
