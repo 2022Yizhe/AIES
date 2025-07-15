@@ -110,14 +110,15 @@ public class EasStudentServiceImpl implements EasStudentService {
         // 读取 Excel 数据
         List<Student> students = readStudentExcel(fileBytes, Student.class);
 
-        // 插入数据库 (先插入用户表再插入学生表)
+        // 插入数据库 (先插入用户表，再插入权限表，最后插入学生表)
         for (Student student : students) {
             EasUser user = new EasUser();
             user.setUsername(student.getUsername());
-            user.setPassword("123456");
-            user.setSalt("123456");
+            user.setPassword("a66abb5684c45962d887564f08346e8d");
+            user.setSalt("admin");
             user.setLocked("0");
             easUserMapper.add(user);
+            easUserMapper.addUserRole(user.getId(), new Integer[]{2});  // 学生 - 2
         }
         easStudentMapper.insertBatch(students);
 
