@@ -123,7 +123,17 @@ public class EasStudentServiceImpl implements EasStudentService {
 
         System.out.println("[Service] Import " + students.size() + " student records from "+ fileUrl);
 
-}
+    }
+
+    /**
+     * 查找学生是否存在
+     * @param username 学生用户名
+     */
+    @Override
+    public boolean hasStudent(String username) {
+        EasStudent student = easStudentMapper.getStudentByUsername(username);
+        return student != null;
+    }
 
     /** 使用 EasyExcel 读取 Excel 数据
      * @return List<Student>

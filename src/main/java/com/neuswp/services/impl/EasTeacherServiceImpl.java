@@ -104,6 +104,16 @@ public class EasTeacherServiceImpl implements EasTeacherService {
     }
 
     /**
+     * 查询教师是否存在
+     * @param username 教师用户名
+     */
+    @Override
+    public boolean hasTeacher(String username) {
+        EasTeacher teacher = easTeacherMapper.getTeacherByUsername(username);
+        return teacher != null;
+    }
+
+    /**
      * 使用 EasyExcel 读取 Excel 数据
      * @return List<Teacher>
      */

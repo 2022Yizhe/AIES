@@ -35,4 +35,6 @@ public interface EasStudentService {
     void deleteStudent(String username) throws Exception;
 
     void importStudentsFromOSS(String fileUrl);
+
+    boolean hasStudent(String username);
 }

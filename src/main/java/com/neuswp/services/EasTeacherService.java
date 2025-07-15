@@ -26,4 +26,6 @@ public interface EasTeacherService {
     void deleteTeacher(String username);
 
     void importTeachersFromOSS(String filePath);
+
+    boolean hasTeacher(String username);
 }
