@@ -32,7 +32,7 @@
         }
 
         .container {
-            background: #f3f3f3;
+            background: #fff9ec;
             padding: 50px 0 100px 0;
             overflow: hidden;
         }
