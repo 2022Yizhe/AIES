@@ -41,7 +41,7 @@ public class AiQuestionCenterController {
 
         // 2. 调用 AI 服务获取回答
 //        String aiMessage = aiQuestionService.simpleAskQuestion(question);
-        String aiMessage = aiQuestionService.askQuestion(question);
+        String aiMessage = aiQuestionService.askQuestion(currentUser.getId(), question);
         return Result.success(aiMessage);
     }
 

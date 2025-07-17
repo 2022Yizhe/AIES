@@ -59,21 +59,28 @@ public class EasBaseCourseController {
     public Map<String, Object> addBaseCourse(EasBaseCourse easBaseCourse) throws Exception{
         Map<String,Object> map = new HashMap<>();
 
-//        System.out.println("我是基本课程名称:"+easBaseCourse.getCoursename());
-//        System.out.println("我是基本课程简介:"+easBaseCourse.getSynopsis());
-        List<EasBaseCourse> list = easBaseCourseService.findBaseCourseName(easBaseCourse.getCoursename());
+        // 防止 easBaseCourse 为 null （小改动）
+        if (easBaseCourse == null) {
+            map.put("msg", "课程信息不能为空");
+            map.put("result", false);
+            return map;
+        }
 
-        if (list.size() != 0){
-            map.put("msg","基本课程已存在");
-            map.put("result",false);
-        }else if(easBaseCourse.getCoursename().length() <= 0){
-            map.put("msg","课程名称不能为空");
-            map.put("result",false);
-        }else{
-            //课程为null也可以添加 待完善
+        String courseName = easBaseCourse.getCoursename();
+
+        // 判断课程名称是否为空（包括 null 和空字符串）
+        List<EasBaseCourse> list = easBaseCourseService.findBaseCourseName(courseName);
+
+        if (list != null && !list.isEmpty()) {
+            map.put("msg", "基本课程已存在");
+            map.put("result", false);
+        } else if (courseName == null || courseName.trim().isEmpty()) {
+            map.put("msg", "课程名称不能为空");
+            map.put("result", false);
+        } else {
             easBaseCourseService.addBaseCourse(easBaseCourse);
-            map.put("msg","添加成功");
-            map.put("result",true);
+            map.put("msg", "添加成功");
+            map.put("result", true);
         }
         return map;
     }
