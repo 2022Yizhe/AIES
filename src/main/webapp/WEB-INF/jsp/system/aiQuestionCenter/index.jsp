@@ -337,6 +337,9 @@
                     limit: 10
                 },
                 success: function(response) {
+                    // 清空聊天框
+                    $('#chatBox').empty();
+
                     if(response.code === 0 && response.data && response.data.length > 0) {
                         // 按时间顺序显示历史记录
                         response.data.reverse().forEach(function(item) {
