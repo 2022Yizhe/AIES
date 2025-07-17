@@ -108,7 +108,7 @@
                         layer.msg("请选择要删除的数据",function(){});
                         return;
                     }
-                    layer.confirm('真的干掉这么多基本课程吗？',{icon:5,title:'友情提示'},function (index) {
+                    layer.confirm('确定删除这些课程吗？',{icon:5,title:'友情提示'},function (index) {
                         var params = "";
                         for(let baseCourse of data){
                             params += "ids="+baseCourse.id+"&";

@@ -149,7 +149,7 @@
                         layer.msg("请选择要删除的数据",function(){});
                         return;
                     }
-                    layer.confirm('真的干掉这么多数码吗？',{icon:5,title:'友情提示'},function (index) {
+                    layer.confirm('确定删除选中的课程吗？',{icon:5,title:'友情提示'},function (index) {
                         var params = "";
                         for(let course of data){
                             params += "ids="+course.id+"&";

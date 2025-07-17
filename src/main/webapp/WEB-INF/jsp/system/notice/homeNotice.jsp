@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%--	查看公告页面--%>
+    <%-- 查看公告页面 --%>
     <title>主页公告</title>
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="this is my page">

@@ -79,7 +79,7 @@
         table.on("tool(teacherCourseTable)",function (obj) {
             var data = obj.data;
             if (obj.event == 'edit'){ //edit
-                layer.confirm('请确保结束课程前已提交学生成绩！确定结束此课程？', {icon: 3, title: '提示信息'},function (index) {
+                layer.confirm('请确保结束课程后已提交学生成绩！确定结束此课程？', {icon: 3, title: '提示信息'},function (index) {
                     $.ajax({
                         type: "get",
                         data:{id: data.id,complete:data.complete},
