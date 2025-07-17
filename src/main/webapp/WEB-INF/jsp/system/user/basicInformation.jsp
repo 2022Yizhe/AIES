@@ -123,7 +123,6 @@
                 yes:function (index){
                     var params2 = $("#edit_basic_form").serialize();
                     $.post('${path}/easUser/modifyInformation',params2,function (data) {
-                        // console.log(params2);
                         if(data.result === true){
                             layer.close(index);
                             layer.msg('修改成功',{icon:1,time:1000})
