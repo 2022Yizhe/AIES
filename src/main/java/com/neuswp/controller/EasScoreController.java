@@ -195,7 +195,7 @@ public class EasScoreController {
     }
 
     /**
-     * 返回选修了我(教师)已结束课程的学生列表
+     * 返回选修了我 (教师) 已结束课程的学生列表
      * @param page
      * @param limit
      * @param baseCourseId
@@ -209,19 +209,19 @@ public class EasScoreController {
                                             @RequestParam(defaultValue = "10") Integer limit,
                                             @RequestParam(required=false) Integer baseCourseId,
                                             @RequestParam(required=false) Integer classId) throws Exception {
-    //    @requestparam(required = false)不传值后台也不会报错
+    //    @requestparam(required = false) 表示支持可选参数
 
         Map<String, Object> map = new HashMap<>();
-        //获取当前教师id
+        // 获取当前教师 id
         EasUser easUser = (EasUser) SecurityUtils.getSubject().getPrincipal();//获取EasUser对象
         String username = easUser.getUsername();
         EasTeacher easTeacher = easTeacherService.findTeacherByUsername(username);
 
-        //获取行数
+        // 先获取行数 (包括已结束和未结束)
         int count = easStudentService.getEndingCountBytIdandcId(easTeacher.getId(),baseCourseId,classId);
         PageUtil pageUtil = new  PageUtil(page,limit);
 
-
+        // 再获取数据 (包括已结束和未结束)
         List<EasStudent> list = easStudentService.getStudentScoreListByTid(easTeacher.getId(),baseCourseId,classId,pageUtil);
 
         map.put("count",count);
