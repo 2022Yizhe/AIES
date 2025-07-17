@@ -36,7 +36,7 @@
                 height : "full-125",//高度将始终铺满
                 // toolbar:'#toolbarDemo',
                 toolbar: true,
-                defaultToolbar:['filter', 'exports', 'print'],
+                defaultToolbar:['filter', 'exports'],
                 cols : [[
                     {field:'text', title:'权限名称'},
                     {field:'type', title:'权限类型'},

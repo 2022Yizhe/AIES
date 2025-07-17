@@ -34,14 +34,35 @@
         <collection property="roles" javaType="java.util.List" ofType="com.neuswp.entity.EasRole" column="id" select="com.neuswp.mappers.EasRoleMapper.getByUserId"></collection>
     </resultMap>
 
-    <select id="getList" parameterType="com.neuswp.entity.EasUser" resultMap="userMap">
+<!--    <select id="getList" parameterType="com.neuswp.entity.EasUser" resultMap="userMap">-->
+<!--        select * from eas_user-->
+<!--        <where>-->
+<!--            <if test="easUser.username != null and easUser.username != ''">-->
+<!--                and username like concat('%',#{username},'%')-->
+<!--            </if>-->
+<!--            <if test="easUser.roles != null and easUser.roles.size != 0 and easUser.roles[0].id !=-1">-->
+<!--                and id in(-->
+<!--                     select eas_user_id from eas_user_role where eas_role_id in-->
+<!--                    <foreach collection="easUser.roles" item="item" open="(" close=")" separator=",">-->
+<!--                        #{item.id}-->
+<!--                    </foreach>-->
+<!--                )-->
+<!--            </if>-->
+<!--        </where>-->
+<!--        <if test="pageUtil != null">-->
+<!--            limit #{pageUtil.pageStart},#{pageUtil.count}-->
+<!--        </if>-->
+<!--    </select>-->
+
+    <select id="getList" parameterType="map" resultMap="userMap">
         select * from eas_user
         <where>
             <if test="easUser.username != null and easUser.username != ''">
-                and username like concat('%',#{username},'%')
+                and username like concat('%', #{easUser.username}, '%')
             </if>
-            <if test="easUser.roles != null and easUser.roles.size != 0 and easUser.roles[0].id !=-1">
-                and id in(select eas_user_id from eas_user_role where eas_role_id in
+            <if test="easUser.roles != null and easUser.roles.size != 0 and easUser.roles[0].id != -1">
+                and id in (
+                select eas_user_id from eas_user_role where eas_role_id in
                 <foreach collection="easUser.roles" item="item" open="(" close=")" separator=",">
                     #{item.id}
                 </foreach>
@@ -49,9 +70,10 @@
             </if>
         </where>
         <if test="pageUtil != null">
-            limit #{pageUtil.pageStart},#{pageUtil.count}
+            limit #{pageUtil.pageStart}, #{pageUtil.count}
         </if>
     </select>
+
 
     <insert id="add" parameterType="com.neuswp.entity.EasUser" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into eas_user(username, password, salt, locked)

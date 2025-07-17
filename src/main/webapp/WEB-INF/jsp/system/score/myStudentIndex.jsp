@@ -75,7 +75,7 @@
             // height : "full-125",
             page : true,
             toolbar: true,
-            defaultToolbar: ['filter', 'exports', 'print'],
+            defaultToolbar: ['filter', 'exports'],
             title: '我的学生选课表',
             cols : colsArray
         });

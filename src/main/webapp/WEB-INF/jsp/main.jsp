@@ -10,12 +10,13 @@
     <script>
         layui.use('layer');
         function logout() {
-            layer.confirm('确定要退了?',{icon:3,title:'提示'},function (index) {
+            layer.confirm('确定要退出?',{icon:3,title:'提示'},function (index) {
                 location.href = "${path}/easUser/logout";
             });
         }
     </script>
 </head>
+
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
@@ -39,7 +40,7 @@
                     <dd><a href="${path}/easUser/passwordRestIndex" target="middle">修改密码</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="javascript:void(0)" onclick="logout();">退了</a></li>
+            <li class="layui-nav-item"><a href="javascript:void(0)" onclick="logout();">退出</a></li>
         </ul>
     </div>
 
@@ -75,7 +76,7 @@
 
     <div class="layui-footer">
         <!-- 底部固定区域 -->
-        © www.zhangqingeas.online - 底部固定区域
+        © www.neuswp.online - 底部固定区域
     </div>
 </div>
 

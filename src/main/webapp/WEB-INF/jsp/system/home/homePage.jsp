@@ -32,7 +32,7 @@
         }
 
         .container {
-            background: #f3f3f3;
+            background: #fff9ec;
             padding: 50px 0 100px 0;
             overflow: hidden;
         }
@@ -176,7 +176,7 @@
 <div class="container">
     <div class="main">
         <div class="title">
-            <h4>新闻资讯</h4>
+            <h4>教学通知</h4>
             <p >News</p>
         </div>
         <ul style="margin-left:15%;">

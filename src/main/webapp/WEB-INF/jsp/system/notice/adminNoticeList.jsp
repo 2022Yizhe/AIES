@@ -60,7 +60,7 @@
             // },
             cellMinWidth : 95,
             toolbar:true,
-            defaultToolbar: ['filter', 'exports', 'print'],
+            defaultToolbar: ['filter', 'exports'],
             page : true,
             title: '公告信息表',
             height : "full-125",

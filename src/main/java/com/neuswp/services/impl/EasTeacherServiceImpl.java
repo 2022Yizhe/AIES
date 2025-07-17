@@ -89,18 +89,29 @@ public class EasTeacherServiceImpl implements EasTeacherService {
         // 读取 Excel 数据
         List<Teacher> teachers = readTeacherExcel(fileBytes, Teacher.class);
 
-        // 插入数据库 (先插入用户表再插入教师表)
+        // 插入数据库 (先插入用户表，再插入权限表，最后插入教师表)
         for (Teacher teacher : teachers) {
             EasUser user = new EasUser();
             user.setUsername(teacher.getUsername());
-            user.setPassword("123456");
-            user.setSalt("123456");
+            user.setPassword("a66abb5684c45962d887564f08346e8d");
+            user.setSalt("admin");
             user.setLocked("0");
             easUserMapper.add(user);
+            easUserMapper.addUserRole(user.getId(), new Integer[]{3});  // 教师 - 3
         }
         easTeacherMapper.insertBatch(teachers);
 
         System.out.println("[Service] Import " + teachers.size() + " teacher records from "+ fileUrl);
+    }
+
+    /**
+     * 查询教师是否存在
+     * @param username 教师用户名
+     */
+    @Override
+    public boolean hasTeacher(String username) {
+        EasTeacher teacher = easTeacherMapper.getTeacherByUsername(username);
+        return teacher != null;
     }
 
     /**

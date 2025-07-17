@@ -55,7 +55,7 @@
             ,url:'${path}/easBaseCourse/list'
             ,even: true
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
-            ,defaultToolbar: ['filter', 'exports', 'print']
+            ,defaultToolbar: ['filter', 'exports']
             ,title: '基本课程表'
             ,page: true
             ,cols: [[
@@ -108,7 +108,7 @@
                         layer.msg("请选择要删除的数据",function(){});
                         return;
                     }
-                    layer.confirm('真的干掉这么多基本课程吗？',{icon:5,title:'友情提示'},function (index) {
+                    layer.confirm('确定删除这些课程吗？',{icon:5,title:'友情提示'},function (index) {
                         var params = "";
                         for(let baseCourse of data){
                             params += "ids="+baseCourse.id+"&";

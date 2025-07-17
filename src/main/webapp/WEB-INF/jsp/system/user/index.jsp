@@ -33,7 +33,7 @@
 </div>
 </form>
 
-<table class="layui-table" lay-data="{id:'userTable',url:'${path}/easUser/list', page:true,toolbar:'#toolbarDemo',defaultToolbar: ['filter', 'print', 'exports'],even: true,height : 'full-125'}"
+<table class="layui-table" lay-data="{id:'userTable',url:'${path}/easUser/list', page:true,toolbar:'#toolbarDemo',defaultToolbar: ['filter',  'exports'],even: true,height : 'full-125'}"
        lay-filter="userTable">
     <thead>
     <tr>

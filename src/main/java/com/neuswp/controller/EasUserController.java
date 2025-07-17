@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -361,35 +362,37 @@ public class EasUserController {
 
     @RequestMapping(value = "/modifyInformation",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> modifyInformation(EasStudent easStudent,EasTeacher easTeacher,Integer classes) throws Exception{
+    public Map<String, Object> modifyInformation(@RequestParam Map<String, String> params) throws Exception {
         Map<String, Object> map = new HashMap<>();
-        EasUser easUser = (EasUser) SecurityUtils.getSubject().getPrincipal();//获取EasUser对象
+        EasUser easUser = (EasUser) SecurityUtils.getSubject().getPrincipal();
         Integer roleid = easUserService.findRoleIdByUserId(easUser.getId());
         String rolename = easRoleService.findRoleNameByRoleId(roleid);
-        if(roleid == 1000 || !(rolename.length() > 0)){
-            System.out.println("我怎么变成null了！");
-            map.put("result",false);
-            return map;
-        }else if(rolename.equals(Constants.STUDENT)){
-            //名称不符合必须重新set课程id
-            easStudent.setClass_id(classes);
+
+        if (rolename.equals(Constants.STUDENT)) {
+            EasStudent easStudent = new EasStudent();
+            easStudent.setUsername(params.get("username"));
+            easStudent.setName(params.get("name"));
+            easStudent.setSex(params.get("sex"));
+            easStudent.setBirthday(LocalDate.parse(params.get("birthday")));
+            easStudent.setPhone(params.get("phone"));
+            easStudent.setMotto(params.get("motto"));
+
             easStudentService.updateStudent(easStudent);
+        } else if (rolename.equals(Constants.TEACHER)) {
+            EasTeacher easTeacher = new EasTeacher();
+            easTeacher.setUsername(params.get("username"));
+            easTeacher.setName(params.get("name"));
+            easTeacher.setSex(params.get("sex"));
+            easTeacher.setBirthday(LocalDate.parse(params.get("birthday")));
+            easTeacher.setPhone(params.get("phone"));
+            easTeacher.setMotto(params.get("motto"));
+            easTeacher.setEducation(params.get("education"));
 
-            map.put("result",true);
-            return map;
-        }else if(rolename.equals(Constants.TEACHER)){
             easTeacherService.updateTeacher(easTeacher);
-
-            map.put("result",true);
-            return map;
-        }else{
-            /**
-             * 可以扩充。。。
-             */
-            System.out.println("哪里出错了！");
-            map.put("result",false);
-            return map;
         }
+
+        map.put("result", true);
+        return map;
     }
 
 

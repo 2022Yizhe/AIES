@@ -66,7 +66,7 @@
             ,even: true
             // ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,toolbar: true //不自定义也需要 开启
-            ,defaultToolbar: ['filter', 'exports', 'print']
+            ,defaultToolbar: ['filter', 'exports']
             ,title: '课程表'
             ,height : "full-125"
             ,page: true //开启分页
@@ -79,7 +79,7 @@
         table.on("tool(teacherCourseTable)",function (obj) {
             var data = obj.data;
             if (obj.event == 'edit'){ //edit
-                layer.confirm('请确保结束课程前已提交学生成绩！确定结束此课程？', {icon: 3, title: '提示信息'},function (index) {
+                layer.confirm('请确保结束课程后已提交学生成绩！确定结束此课程？', {icon: 3, title: '提示信息'},function (index) {
                     $.ajax({
                         type: "get",
                         data:{id: data.id,complete:data.complete},

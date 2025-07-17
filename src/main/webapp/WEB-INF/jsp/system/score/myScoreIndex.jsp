@@ -57,7 +57,7 @@
                 cellMinWidth : 95,
                 page : true,
                 toolbar: true,
-                defaultToolbar: ['filter', 'exports', 'print'],
+                defaultToolbar: ['filter', 'exports'],
                 cols : colsArray
             });
         }

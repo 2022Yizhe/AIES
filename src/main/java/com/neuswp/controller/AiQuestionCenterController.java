@@ -41,13 +41,13 @@ public class AiQuestionCenterController {
 
         // 2. 调用 AI 服务获取回答
 //        String aiMessage = aiQuestionService.simpleAskQuestion(question);
-        String aiMessage = aiQuestionService.askQuestion(question);
+        String aiMessage = aiQuestionService.askQuestion(currentUser.getId(), question);
         return Result.success(aiMessage);
     }
 
 
     /**
-     * 从内存中读取历史会话记录并返回
+     * 从数据库读取历史会话记录并返回（先清空对话界面）
      */
     @RequestMapping(value = "/history", method = RequestMethod.GET)
     @ResponseBody // 注意添加 @ResponseBody 注解，表示返回的是 JSON 数据

@@ -3,6 +3,8 @@ package com.neuswp.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.neuswp.entity.EasTeacher;
+import com.neuswp.entity.EasUser;
+import com.neuswp.services.EasStudentService;
 import com.neuswp.services.EasTeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +26,9 @@ public class EasTeacherController {
 
     @Autowired
     private EasTeacherService easTeacherService;
+
+    @Autowired
+    private EasStudentService easStudentService;
 
     @RequestMapping("/index")
     public String index() throws Exception{
@@ -61,6 +67,10 @@ public class EasTeacherController {
         return easTeacherService.getAll();
     }
 
+    /**
+     * 导入教师信息 (从 EXCEL)
+     * @param filePath Ali OSS url
+     */
     @RequestMapping(value = "/import", method = RequestMethod.POST)
     public ResponseEntity<?> importTeachers(@RequestParam("filePath") String filePath) {
         try {
@@ -75,6 +85,32 @@ public class EasTeacherController {
             return ResponseEntity.status(500).body(Map.of(
                     "code", 500,
                     "msg", "error: " + e.getMessage()
+            ));
+        }
+    }
+
+    /**
+     * 可靠性一般的权限控制
+     */
+    @RequestMapping(value = "/import", method = RequestMethod.GET)
+    public ResponseEntity<?> checkPermission(HttpSession session) {
+        /// 检查当前用户是否具有导入权限
+
+        // 1. 获取当前用户
+        EasUser currentUser = (EasUser) session.getAttribute("login_user");
+        System.out.println("[Controller] Current User: " + currentUser);
+        String username = currentUser.getUsername();
+
+        // 2. 检查权限
+        if (!easStudentService.hasStudent(username) && !easTeacherService.hasTeacher(username)) {
+            return ResponseEntity.ok().body(Map.of(
+                    "code", 200,
+                    "msg", "success"
+            ));
+        } else {
+            return ResponseEntity.status(200).body(Map.of(
+                    "code", 203,
+                    "msg", "NO_PERMISSION"
             ));
         }
     }

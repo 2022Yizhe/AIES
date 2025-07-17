@@ -78,7 +78,7 @@
             // height : "full-125",
             page : true,
             toolbar: true,
-            defaultToolbar: ['filter', 'exports', 'print'],
+            defaultToolbar: ['filter', 'exports'],
             title: '学生成绩表',
             cols : colsArray
         });

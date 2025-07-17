@@ -126,13 +126,15 @@
             </if>
         </where>
     </select>
+
+    <!--  教师查询学生成绩时统计分页的数量 (包括已结束和未结束)  -->
     <select id="getEndingCountBytIdandcId" resultType="java.lang.Integer">
         select count(*)
         from eas_student as A, eas_score as B, eas_course as C, eas_base_course as BC,eas_class as CS
         <where>
             A.id = B.s_id and C.id = B.c_id and C.base_course_id = BC.id and CS.id = A.class_id
-            -- 已结束课程 complete = 1 --
-            and C.complete = 1
+            -- 未结束课程 complete = 0 吗 --
+#             and C.complete = 0
             and C.t_id = #{tId}
             <if test="baseCourseId != null and baseCourseId != ''">
                 and C.base_course_id = #{baseCourseId}
@@ -143,13 +145,15 @@
         </where>
     </select>
 
+    <!--  教师查询学生成绩 (包括已结束和未结束) -->
     <select id="getStudentScoreListByTid" resultMap="BaseResultMap">
         select B.id as id, A.id as sId, A.name as sName, sex, phone,
         score, result, C.id as cId, BC.coursename as courseName,CS.classes as className
         from eas_student as A , eas_score as B , eas_course as C , eas_base_course as BC,eas_class as CS
         <where>
             A.id = B.s_id and C.id = B.c_id and C.base_course_id = BC.id and A.class_id = CS.id
-            and C.complete = 1
+            -- 未结束课程 complete = 0 吗 --
+#             and C.complete = 0
             and C.t_id = #{tId}
             <if test="baseCourseId != null and baseCourseId != '' ">
                 and C.base_course_id = #{baseCourseId}
@@ -162,13 +166,16 @@
             limit #{pageUtil.pageStart},#{pageUtil.count}
         </if>
     </select>
+
+    <!--  教师查询学生选课 (包括已结束和未结束)  -->
     <select id="getStudentSelectCourseListByTid" resultMap="BaseResultMap">
         select B.id as id, A.id as sId, A.name as sName, sex, phone,
             C.id as cId, BC.coursename as courseName,CS.classes as className
         from eas_student as A , eas_score as B , eas_course as C , eas_base_course as BC,eas_class as CS
         <where>
             A.id = B.s_id and C.id = B.c_id and C.base_course_id = BC.id and A.class_id = CS.id
-            and C.complete = 0
+            -- 未结束课程 complete = 0 吗 --
+#             and C.complete = 0
             and C.t_id = #{tId}
             <if test="baseCourseId != null and baseCourseId != '' ">
                 and C.base_course_id = #{baseCourseId}
@@ -181,6 +188,7 @@
             limit #{pageUtil.pageStart},#{pageUtil.count}
         </if>
     </select>
+
     <select id="getTotal" resultType="java.lang.Integer">
         select count(*) from eas_student
     </select>

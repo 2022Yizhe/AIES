@@ -77,7 +77,7 @@
             ,url:'${path}/easCourse/getCourseList' //获取数据
             ,even: true
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
-            ,defaultToolbar: ['filter', 'exports', 'print']
+            ,defaultToolbar: ['filter', 'exports']
             ,height : "full-125" //高度将始终铺满
             ,cellMinWidth : 95//最小宽度
             ,title: '课程表'
@@ -149,7 +149,7 @@
                         layer.msg("请选择要删除的数据",function(){});
                         return;
                     }
-                    layer.confirm('真的干掉这么多数码吗？',{icon:5,title:'友情提示'},function (index) {
+                    layer.confirm('确定删除选中的课程吗？',{icon:5,title:'友情提示'},function (index) {
                         var params = "";
                         for(let course of data){
                             params += "ids="+course.id+"&";

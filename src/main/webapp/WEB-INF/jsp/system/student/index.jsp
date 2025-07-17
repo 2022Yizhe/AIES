@@ -36,10 +36,10 @@
             </div>
 
             <!-- 在表单中添加一个文件上传组件和按钮 -->
-            <div class="layui-input-inline" style="width: 150px;">
+            <div id="upload_s1" class="layui-input-inline" style="width: 150px;">
                 <input type="file" id="excelFile" accept=".xls,.xlsx" />
             </div>
-            <div class="layui-input-inline" style="width: 90px;">
+            <div id="upload_s2" class="layui-input-inline" style="width: 90px;">
                 <button type="button" class="layui-btn layui-btn-warm" onclick="uploadExcel();">
                     <i class="layui-icon layui-icon-upload"></i> 批量导入
                 </button>
@@ -48,7 +48,7 @@
 
     </div>
 </form>
-<table class="layui-table" lay-data="{id:'studentTable',url:'${path}/easStudent/list', page:true,toolbar:'#toolbarDemo',defaultToolbar: ['filter', 'print', 'exports'],even: true}"
+<table class="layui-table" lay-data="{id:'studentTable',url:'${path}/easStudent/list', page:true,toolbar:'#toolbarDemo',defaultToolbar: ['filter', 'exports'],even: true}"
        lay-filter="studentTable">
     <thead>
     <tr>
@@ -135,6 +135,21 @@
         });
     }
 
+    // 可靠性一般的权限控制
+    $(document).ready(function () {
+        // 获取当前用户权限
+        $.get("${path}/easStudent/import", function (res) {
+            if (res.code === 200) {
+                // 如果有 student:import 权限，则显示上传区域
+                $("#upload_s1").show();
+                $("#upload_s2").show();
+            } else {
+                // 否则隐藏上传区域
+                $("#upload_s1").hide();
+                $("#upload_s2").hide();
+            }
+        });
+    });
 </script>
 </body>
 </html>
