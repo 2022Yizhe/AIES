@@ -110,6 +110,18 @@
             border: 1px solid #e8e8e8;
         }
 
+        .ai-message, .user-message {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .ai-message p, .user-message p {
+            margin-bottom: 1em;
+        }
+
         .message-time {
             font-size: 12px;
             color: #999;
@@ -272,9 +284,13 @@
 
             var messageClass = 'message ' + sender + '-message';
 
-            // 使用 marked 将 content 转换为 HTML
+            // Step 1: 使用 marked 将 content 转换为 HTML
             var htmlContent = marked.parse(content);
 
+            // // Step 2: 在每个段落 </p> 前插入 <br>
+            // htmlContent = htmlContent.replace(/<\/p>/g, '<br></p>');
+
+            // Step 3: 构建最终消息 HTML
             var messageHtml = '<div class="' + messageClass + '">' +
                 '<div>' + htmlContent + '</div>' +
                 '<div class="message-time">' + timeString + '</div>' +
