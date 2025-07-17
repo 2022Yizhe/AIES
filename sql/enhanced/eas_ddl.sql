@@ -1,3 +1,12 @@
+create table ai_chat_history
+(
+    id       int auto_increment
+        primary key,
+    question varchar(2048) not null comment '用户 prompt (支持 2k 上下文)',
+    user_id  int           not null comment '当前用户 id',
+    reply    varchar(8192) null comment 'AI 回复 (支持 8k 上下文)'
+);
+
 create table eas_base_course
 (
     id         int unsigned auto_increment comment '课程id'
