@@ -3,11 +3,15 @@ package com.neuswp.services.impl;
 import com.neuswp.constant.IntendKeyWords;
 import com.neuswp.entity.AiChatHistory;
 import com.neuswp.mappers.AiChatHistoryMapper;
+import com.neuswp.mappers.EasStudentMapper;
+import com.neuswp.mappers.EasUserMapper;
 import com.neuswp.services.AiQuestionCenterService;
+import com.neuswp.services.EasStudentService;
 import com.neuswp.utils.ExcelExport;
 import com.neuswp.utils.VolEngineAI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +24,12 @@ public class AiQuestionCenterServiceImpl implements AiQuestionCenterService {
 
     @Autowired
     private AiChatHistoryMapper aiChatHistoryMapper;
+
+    @Autowired
+    private EasStudentMapper easStudentMapper;
+
+    @Autowired
+    private EasUserMapper easUserMapper;
 
     private VolEngineAI volEngineAI;
 
@@ -50,11 +60,15 @@ public class AiQuestionCenterServiceImpl implements AiQuestionCenterService {
             return "未成功接入推理模型";
 
         /// 识别用户意图，进行带有功能调用的对话
-        // 1. 意图解析
-        String parsedIntend = parseUserInputToIntent(question);
+        // 1. 意图解析 (学生用户暂不支持此功能)
+        String parsedIntend = null;
+        if (easStudentMapper.getStudentByUsername(easUserMapper.findUsernameById(userId)) == null)
+            parsedIntend = parseUserInputToIntent(question);
 
         // 2. 功能调用
-        String url = excelExport.recognize(parsedIntend);
+        String url = null;
+        if (parsedIntend != null)
+            url = excelExport.recognize(parsedIntend);
 
         // 3. 对话
         String reply = (url != null) ? "自动导出表格: " + url : volEngineAI.SimpleGenerate(question);
