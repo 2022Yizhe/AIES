@@ -5,10 +5,8 @@ import com.neuswp.utils.PageUtil;
 
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/21 21:37
- */
+
+
 public interface EasBaseCourseService {
     List<EasBaseCourse> getAll();
 

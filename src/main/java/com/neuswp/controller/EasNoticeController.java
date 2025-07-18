@@ -20,10 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/27 11:35
- */
+
 @RequestMapping("/easNotice")
 @Controller
 public class EasNoticeController {

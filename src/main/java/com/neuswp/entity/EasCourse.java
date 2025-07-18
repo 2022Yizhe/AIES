@@ -3,11 +3,7 @@ package com.neuswp.entity;
 import java.io.Serializable;
 import java.sql.Date;
 
-/**
- * @Author JubilantZ
- * 课程表
- * @Date: 2021/4/23 9:11
- */
+
 //返回如果是对象，对象需要实现序列化
 public class EasCourse implements Serializable {
     private Integer id;

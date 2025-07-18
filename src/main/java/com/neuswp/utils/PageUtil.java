@@ -1,8 +1,6 @@
 package com.neuswp.utils;
 
 /**
- * @Author JubilantZ
- * @Date: 2021/4/22 12:03
  * 查询分页工具
  */
 public final class PageUtil {

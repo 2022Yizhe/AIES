@@ -2,10 +2,7 @@ package com.neuswp.entity;
 
 import java.io.Serializable;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/23 9:17
- */
+
 public class EasScore implements Serializable {
     private Integer id;
     private Integer score;

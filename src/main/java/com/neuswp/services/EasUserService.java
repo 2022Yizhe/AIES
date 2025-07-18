@@ -4,10 +4,8 @@ import com.neuswp.entity.EasUser;
 
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/12 16:26
- */
+
+
 public interface EasUserService {
 
     void addUser(EasUser user) throws Exception;

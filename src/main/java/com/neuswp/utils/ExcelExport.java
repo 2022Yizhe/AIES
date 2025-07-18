@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * 功能调用路由：实现用户意图到功能的映射
  * 使用 easy-excel 导出 List 数据为 Excel 表格，并存储在阿里云 OSS 中
- * 注：部署此项目需要配置阿里云的 OSS 服务和 Access License！
+ * 注：此功能正常运行需要配置阿里云的 OSS 服务和 Access License！
  */
 @Slf4j
 @Component

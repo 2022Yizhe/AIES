@@ -5,10 +5,8 @@ import com.neuswp.utils.PageUtil;
 
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/28 12:09
- */
+
+
 public interface EasNoticeService {
     int getCountByType(int type,String searchKey) throws Exception;
 

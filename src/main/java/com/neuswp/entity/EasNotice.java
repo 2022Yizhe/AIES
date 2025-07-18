@@ -3,11 +3,7 @@ package com.neuswp.entity;
 import java.io.Serializable;
 import java.sql.Date;
 
-/**
- * @Author JubilantZ
- * 通知表
- * @Date: 2021/4/27 10:21
- */
+
 public class EasNotice implements Serializable {
     private Integer id;
     private String title;

@@ -7,10 +7,8 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/28 12:10
- */
+
+
 @Mapper
 public interface EasNoticeMapper {
     int getCountByType(@Param("type") int type,@Param("searchKey") String searchKey);

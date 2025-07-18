@@ -7,10 +7,8 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/21 21:38
- */
+
+
 @Mapper
 public interface EasBaseCourseMapper {
     List<EasBaseCourse> getAll();
