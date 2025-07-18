@@ -3,6 +3,7 @@ package com.neuswp.services;
 import java.util.List;
 import java.util.Map;
 
+
 public interface AiQuestionCenterService {
 
     String simpleAskQuestion(String question);

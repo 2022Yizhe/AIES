@@ -8,10 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/22 9:38
- */
+
+
 @Mapper
 public interface EasCourseMapper {
 

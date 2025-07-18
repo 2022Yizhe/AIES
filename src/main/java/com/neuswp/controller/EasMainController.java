@@ -18,10 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/28 20:25
- */
+
 @RequestMapping("/main")
 @Controller
 public class EasMainController {

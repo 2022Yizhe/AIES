@@ -3,11 +3,7 @@ package com.neuswp.entity;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * 权限表
- * @Date: 2021/4/7 9:47
- */
+
 public class EasPermission implements Serializable {
     private Integer id;
     private String text;

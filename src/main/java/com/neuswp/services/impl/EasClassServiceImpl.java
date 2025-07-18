@@ -9,10 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/15 12:30
- */
+
+
 @Service
 public class EasClassServiceImpl implements EasClassService {
 

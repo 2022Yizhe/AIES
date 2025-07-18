@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/29 18:29
- */
+
 @RequestMapping("/easEchart")
 @Controller
 public class EasEchartController {

@@ -7,10 +7,8 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/7 10:49
- */
+
+
 @Mapper
 public interface EasUserMapper{
 

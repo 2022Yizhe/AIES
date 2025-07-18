@@ -2,11 +2,7 @@ package com.neuswp.entity;
 
 import java.io.Serializable;
 
-/**
- * @Author JubilantZ
- * 角色表
- * @Date: 2021/4/7 9:48
- */
+
 public class EasRole implements Serializable {
     private Integer id;
     private String name;

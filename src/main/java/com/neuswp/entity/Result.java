@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
  * 统一响应结果类
  * REST-ful

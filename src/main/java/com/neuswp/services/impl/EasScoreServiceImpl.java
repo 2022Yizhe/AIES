@@ -12,10 +12,8 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/25 20:12
- */
+
+
 @Service
 public class EasScoreServiceImpl implements EasScoreService {
     @Autowired

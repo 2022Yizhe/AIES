@@ -9,10 +9,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @Author JubilantZ
- * @Date: 2021/4/25 20:13
- */
+
+
 @Mapper
 public interface EasScoreMapper {
     int insertSelective(EasScore easScore);
